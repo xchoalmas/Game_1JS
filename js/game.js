@@ -22,21 +22,21 @@ var fly = new Audio();
 var score_audio = new Audio();
 
 fly.src = "audio/fly.mp3";
-score_audio.src = "audio/score.mp3"
+score_audio.src = "audio/score.mp3";
+
+// Push bуtton
+document.addEventListener("keydown", moveUp);
+
+function moveUp() {
+  yPos -= 37;
+  fly.play();
+}
 
 // Blocks
 var pipe = [];
 pipe[0] = {
   x : cvs.width,
   y : 0
-}
-
-// Push bуtton
-document.addEventListener("keydown", moveUp);
-
-function moveUp() {
-  yPos -= 25;
-  fly.play();
 }
 
 // Position for Bird
@@ -55,15 +55,16 @@ function draw() {
 
     pipe[i].x--;
 
-    if(pipe[i].x == 125) {
+    if(pipe[i].x == 80) {
       pipe.push({
         x : cvs.width,
         y : Math.floor(Math.random() * pipeUp.height) - pipeUp.height
-      })
-    }
+      });
+    };
 
+    //
     if(xPos + bird.width >= pipe[i].x
-      && xPos <= pipeUp.width
+      && xPos <= pipe[i].x + pipeUp.width
       && (yPos <= pipe[i].y + pipeUp.height
         || yPos + bird.height >= pipe[i].y + pipeUp.height + gap)
       || yPos + bird.height >= cvs.height - fg.height) {
@@ -72,8 +73,8 @@ function draw() {
     if(pipe[i].x == 5) {
       score++;
       score_audio.play();
-    }
-  }
+    };
+  };
 
   ctx.drawImage(fg, 0, cvs.height - fg.height);
   ctx.drawImage(bird, xPos, yPos);
