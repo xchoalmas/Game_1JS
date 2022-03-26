@@ -44,8 +44,6 @@ var xPos = 10;
 var yPos = 150;
 var grav = 1.5;
 
-
-
 function draw() {
   ctx.drawImage(bg, 0, 0);
 
@@ -62,7 +60,6 @@ function draw() {
       });
     };
 
-    //
     if(xPos + bird.width >= pipe[i].x
       && xPos <= pipe[i].x + pipeUp.width
       && (yPos <= pipe[i].y + pipeUp.height
